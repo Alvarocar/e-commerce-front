@@ -4,19 +4,18 @@ import {
   Switch,
   Route
 } from 'react-router-dom'
+import DefaultLoader from '../templates/loaders/DefaultLoader'
 
-const MainLayout = React.lazy(()  => import('../layouts/MainLayout'))
+const MainLayout = React.lazy(() => import('../layouts/MainLayout'))
 
 
 const Routes = () => (
   <Router>
-    <Switch>
-      <Route exact path="/">
-        <Suspense fallback={<div>Loading...</div>}>
-          <MainLayout />
-        </Suspense>
-      </Route>
-    </Switch>
+    <Suspense fallback={<DefaultLoader />}>
+      <Switch>
+        <Route exact path="/" component={MainLayout}/>
+      </Switch>
+    </Suspense>
   </Router>
 )
 
