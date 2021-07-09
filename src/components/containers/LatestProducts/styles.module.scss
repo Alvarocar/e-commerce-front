@@ -1,0 +1,14 @@
+.title {
+  text-align: center;
+}
+.productList {
+  display: grid;
+  list-style-type: none;
+  grid-template-columns: repeat(auto-fill, minmax( 14rem, 1fr ));
+  column-gap: 2rem;
+  row-gap: 2rem;
+  padding: 2rem 0 0;
+  & a {
+    text-decoration: none;
+  }
+}

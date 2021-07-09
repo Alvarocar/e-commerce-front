@@ -1,4 +1,4 @@
-import LatestProducts from '../../components/LatestProducts'
+import LatestProducts from '../../components/containers/LatestProducts'
 import HomePanel from '../../templates/panels/HomePanel'
 import './styles.scss'
 
