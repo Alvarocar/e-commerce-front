@@ -1,7 +1,9 @@
 import React, { Suspense } from 'react'
 import { useRouteMatch, Switch, Route, Redirect } from "react-router-dom"
+import { ToastContainer } from 'react-toastify'
 import DefaultLoader from '../templates/loaders/DefaultLoader'
 import MainNavBar from "../templates/navbar/MainNavBar"
+import 'react-toastify/dist/ReactToastify.css'
 
 const HomePage = React.lazy(() => import('../pages/HomePage'))
 const ProductPage = React.lazy(() => import('../pages/ProductPage'))
@@ -18,6 +20,7 @@ const MainLayout = () => {
           <Redirect to={path}/>
         </Switch>
       </Suspense>
+      <ToastContainer />
     </div>
   )
 }
