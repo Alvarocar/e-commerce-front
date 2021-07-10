@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify'
 import DefaultLoader from '../templates/loaders/DefaultLoader'
 import MainNavBar from "../templates/navbar/MainNavBar"
 import 'react-toastify/dist/ReactToastify.css'
+import DefaultFooter from '../templates/footers/DefaultFooter'
 
 const HomePage = React.lazy(() => import('../pages/HomePage'))
 const ProductPage = React.lazy(() => import('../pages/ProductPage'))
@@ -20,6 +21,7 @@ const MainLayout = () => {
           <Redirect to={path}/>
         </Switch>
       </Suspense>
+      <DefaultFooter />
       <ToastContainer />
     </div>
   )
