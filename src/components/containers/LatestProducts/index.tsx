@@ -19,7 +19,7 @@ const LatestProducts = () => {
     <section><h2 className={styles.title}>Latest Products</h2></section>
     <section className="products">
       <ul className={styles.productList}>
-        { products.map( product => (<li key={product.id}><Link to="/"><ProductCard product={product}/></Link></li>)) }
+        { products.map( product => (<li key={product.id}><Link to={product.get_absolute_url}><ProductCard product={product}/></Link></li>)) }
       </ul>
     </section>
   </div>

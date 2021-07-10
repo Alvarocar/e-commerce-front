@@ -1,0 +1,47 @@
+.productDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.upperSection {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.figure {
+  height: 30rem;
+  width: 45rem;
+  overflow: scroll;
+  margin: 0;
+  & > img {
+    width: 100%;
+  }
+ }
+
+ .aside {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  gap: 2rem;
+  h3 {
+     font-weight: 500;
+   }
+ }
+
+ .cartForm {
+   button[type="submit"] {
+     background-color: #212121;
+     color: #fff;
+     text-transform: inherit;
+     height: 3.5rem;
+     padding: 1rem 1rem;
+     &:hover {
+       color: #F5F5F5;
+       background-color: #424242;
+     }
+   }
+ }
+
+ .productDescription {
+   width: 45rem;
+ }

@@ -12,3 +12,13 @@ export const getLatestProducts = async (): Promise<ProductDao[]> => {
     throw new Error(EMessage.NetworkError)
   }
 }
+
+export const getProductDetail = async (category_slug: string,
+   product_slug: string): Promise<ProductDao> => {
+  try {
+    const product = await ECommerceAxios.get<ProductDao>(`${api}/products/${category_slug}/${product_slug}`)
+    return product.data
+  } catch {
+    throw new Error(EMessage.NetworkError)
+  }
+}

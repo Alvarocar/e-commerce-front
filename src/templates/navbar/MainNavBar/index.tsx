@@ -5,9 +5,11 @@ import './styles.scss'
 const MainNavBar = () => (
   <AppBar position="sticky">
     <Toolbar className="toolbar">
+        <Link to="/">
           <Typography variant="h6">
             Djackets
           </Typography>
+        </Link>
           <nav className="nav">
             <div className="nav-links-list">
               <Link className="nav-link" to="/">Summer</Link>

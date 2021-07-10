@@ -2,6 +2,13 @@
 .toolbar {
   justify-content: space-between;
   background-color: #212121;
+  & a {
+    text-decoration: none;
+    color: #fff;
+    &:hover {
+      color: #d3d1d1;
+    }
+  }
 }
 .nav {
   display: flex;
