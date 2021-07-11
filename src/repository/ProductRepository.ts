@@ -1,5 +1,6 @@
 import ECommerceAxios from "../api/ECommerceAxios";
 import EMessage from "../constants/EMessage";
+import { CategoryDao } from "../model/Category";
 import { ProductDao } from "../model/Product";
 
 const api = '/api/v1'
@@ -18,6 +19,16 @@ export const getProductDetail = async (category_slug: string,
   try {
     const product = await ECommerceAxios.get<ProductDao>(`${api}/products/${category_slug}/${product_slug}`)
     return product.data
+  } catch {
+    throw new Error(EMessage.NetworkError)
+  }
+}
+
+export const getProductByCategories = async (
+    category_slug: string): Promise<CategoryDao> => {
+  try {
+    const categoryDao = await ECommerceAxios.get<CategoryDao>(`${api}/products/${category_slug}/`)
+    return categoryDao.data
   } catch {
     throw new Error(EMessage.NetworkError)
   }

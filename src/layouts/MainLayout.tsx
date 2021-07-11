@@ -5,18 +5,21 @@ import DefaultLoader from '../templates/loaders/DefaultLoader'
 import MainNavBar from "../templates/navbar/MainNavBar"
 import 'react-toastify/dist/ReactToastify.css'
 import DefaultFooter from '../templates/footers/DefaultFooter'
+import styles from './styles.module.scss'
 
 const HomePage = React.lazy(() => import('../pages/HomePage'))
 const ProductPage = React.lazy(() => import('../pages/ProductPage'))
+const ProductsByCategory = React.lazy(() => import('../pages/ProductsByCategory'))
 
 const MainLayout = () => {
   const { path } = useRouteMatch()
   return (
-    <div id="app">
+    <div id="app" className={styles.main}>
       <MainNavBar />
       <Suspense fallback={<DefaultLoader/>}>
         <Switch>
           <Route exact path={path} component={HomePage}/>
+          <Route exact path={`${path}:category_slug`} component={ProductsByCategory} />
           <Route exact path={`${path}:category_slug/:product_slug`} component={ProductPage} />
           <Redirect to={path}/>
         </Switch>

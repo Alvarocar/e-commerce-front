@@ -23,8 +23,8 @@ const MainNavBar: React.FC<ReduxProps> = ({ cartCount }) => (
         </Link>
           <nav className="nav">
             <div className="nav-links-list">
-              <Link className="nav-link" to="/">Summer</Link>
-              <Link className="nav-link" to="/">Winter</Link>
+              <Link className="nav-link" to="/summer">Summer</Link>
+              <Link className="nav-link" to="/winter">Winter</Link>
             </div>
             <div className="nav-buttons-list">
               <Button className="nav-button" variant="contained">Log in</Button>

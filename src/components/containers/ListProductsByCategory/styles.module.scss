@@ -1,0 +1,16 @@
+.title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.productList {
+  margin-top: 2rem;
+  display: grid;
+  list-style-type: none;
+  grid-template-columns: repeat(auto-fill, minmax( 14rem, 1fr ));
+  column-gap: 2rem;
+  row-gap: 2rem;
+  padding: 2rem 0 0;
+  & a {
+    text-decoration: none;
+  }
+}
