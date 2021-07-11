@@ -19,7 +19,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps)
 
 type ReduxProps = ConnectedProps<typeof connector>
 
-const ProductsByCategory: React.FC<ReduxProps> = ({ category, fetchProducts, status }) => {
+const ListProductsByCategory: React.FC<ReduxProps> = ({ category, fetchProducts, status }) => {
   const { category_slug } = useParams<{category_slug: string}>()
   useEffect(() => {
     document.title = category_slug + ' | Djackets'
@@ -40,4 +40,4 @@ const ProductsByCategory: React.FC<ReduxProps> = ({ category, fetchProducts, sta
   )
 }
 
-export default connector(ProductsByCategory)
+export default connector(ListProductsByCategory)

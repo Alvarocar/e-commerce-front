@@ -33,3 +33,13 @@ export const getProductByCategories = async (
     throw new Error(EMessage.NetworkError)
   }
 }
+
+export const searchProducts = async (query: string): Promise<ProductDao[]> => {
+  try {
+    const products = await ECommerceAxios
+          .post<ProductDao[]>(`${api}/products/search/`, { query })
+    return products.data
+  } catch {
+    throw new Error(EMessage.NetworkError)
+  }
+}

@@ -2,6 +2,8 @@ import { AppBar, Toolbar, Typography, Button } from "@material-ui/core"
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect, ConnectedProps } from "react-redux";
 import { Link } from 'react-router-dom'
+import SearchBox from "../../../components/search/SearchBox";
+import { searchAsyncProducts } from "../../../store/product";
 import { RootState } from "../../../store/store";
 import './styles.scss'
 
@@ -9,11 +11,15 @@ const mapState = (state: RootState) => ({
   cartCount: state.cart.productsCount
 })
 
-const connector = connect(mapState)
+const mapDispatch = {
+  searchProduct: (query: string) => searchAsyncProducts(query) 
+}
+
+const connector = connect(mapState, mapDispatch)
 
 type ReduxProps = ConnectedProps<typeof connector>
 
-const MainNavBar: React.FC<ReduxProps> = ({ cartCount }) => (
+const MainNavBar: React.FC<ReduxProps> = ({ cartCount, searchProduct }) => (
   <AppBar position="sticky">
     <Toolbar className="toolbar">
         <Link to="/">
@@ -21,6 +27,7 @@ const MainNavBar: React.FC<ReduxProps> = ({ cartCount }) => (
             Djackets
           </Typography>
         </Link>
+        <SearchBox dispatch={searchProduct}/>
           <nav className="nav">
             <div className="nav-links-list">
               <Link className="nav-link" to="/summer">Summer</Link>

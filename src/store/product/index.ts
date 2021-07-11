@@ -1,21 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { CategoryDao } from "../../model/Category";
 import { ProductDao } from "../../model/Product";
-import { getLatestProducts, getProductDetail, getProductByCategories } from '../../repository/ProductRepository'
+import { getLatestProducts, getProductDetail,
+       getProductByCategories, searchProducts } from '../../repository/ProductRepository'
 import { RootState } from "../store";
 
 export interface ProductState {
   products: Array<ProductDao>,
   status: 'Idle' | 'Loading' | 'Failed'
   selectedProduct: ProductDao | null
-  productsByCategory: CategoryDao | null
+  productsByCategory: CategoryDao | null,
+  searchedProducts: ProductDao[]
 }
 
 const initialState: ProductState = {
   products: [],
   status: 'Idle',
   selectedProduct: null,
-  productsByCategory: null
+  productsByCategory: null,
+  searchedProducts: []
 }
 
 export const getAsyncLatestProducts = createAsyncThunk('product/latest-products', async () => {
@@ -41,6 +44,15 @@ export const getAsyncProductByCategory = createAsyncThunk('product/productByCate
   try {
     const categoryDao = await getProductByCategories(category_slug)
     return categoryDao
+  } catch (e) {
+    throw new Error(e.message)
+  }
+})
+
+export const searchAsyncProducts = createAsyncThunk('product/search', async (query: string) => {
+  try {
+    const products = await searchProducts(query)
+    return products
   } catch (e) {
     throw new Error(e.message)
   }
@@ -83,6 +95,18 @@ export const ProductSlice = createSlice({
     .addCase(getAsyncProductByCategory.rejected, (state) => {
       state.status = 'Failed'
       state.productsByCategory = null
+    })
+    //serchProducts
+    .addCase(searchAsyncProducts.pending, (state) => {
+      state.status = 'Loading'
+    })
+    .addCase(searchAsyncProducts.fulfilled, (state, action) => {
+      state.status = 'Idle'
+      state.searchedProducts = action.payload
+    })
+    .addCase(searchAsyncProducts.rejected, (state) => {
+      state.status = 'Failed'
+      state.searchedProducts = []
     })
   }
 })

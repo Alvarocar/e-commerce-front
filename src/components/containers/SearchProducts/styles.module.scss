@@ -1,9 +1,7 @@
-.title {
-  text-align: center;
-  margin-bottom: 2.5rem;
+.legend {
+  opacity: .5;
 }
 .productList {
-  margin-top: 2rem;
   display: grid;
   list-style-type: none;
   grid-template-columns: repeat(auto-fill, minmax( 14rem, 1fr ));
@@ -13,6 +11,7 @@
   & a {
     text-decoration: none;
   }
+  
   & li:hover {
     opacity: .7;
   }
