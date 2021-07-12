@@ -1,0 +1,55 @@
+
+.btn-base-circle {
+  height: 1.5rem;
+  width: 1.5rem;
+  text-align: center;
+  border: none;
+  border-radius: 50%;
+}
+
+.quantityCeil {
+  display: flex;
+  span {
+    padding: .1rem .5rem;
+  }
+  button[class="btn-increase"] {
+    @extend .btn-base-circle;
+    background-color: #DCEDC8;
+    &:hover {
+      background-color: #AED581;
+    }
+  }
+  button[class="btn-decrease"] {
+    @extend .btn-base-circle;
+    background-color: #FFCCBC;
+    &:hover {
+      background-color: #FF8A65;
+    }
+  }
+  div[class="ceil-buttons"] {
+    display: flex;
+    justify-content: space-around;
+    margin-left: 1rem;
+    width: 4rem;
+  }
+}
+
+.iconArrow {
+  font-size: .7rem;
+}
+
+.summarySection {
+  margin-top: 2rem;
+  h3[class="section-title"] {
+    opacity: .7;
+  }
+}
+
+.btnDelete {
+  @extend .btn-base-circle;
+  background-color: #E64A19;
+  color: #fff;
+  &:hover {
+    background-color: #FF5722;
+  }
+}

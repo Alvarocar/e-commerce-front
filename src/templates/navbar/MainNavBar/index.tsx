@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core"
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect, ConnectedProps } from "react-redux";
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import SearchBox from "../../../components/search/SearchBox";
 import { searchAsyncProducts } from "../../../store/product";
 import { RootState } from "../../../store/store";
@@ -19,7 +19,9 @@ const connector = connect(mapState, mapDispatch)
 
 type ReduxProps = ConnectedProps<typeof connector>
 
-const MainNavBar: React.FC<ReduxProps> = ({ cartCount, searchProduct }) => (
+const MainNavBar: React.FC<ReduxProps> = ({ cartCount, searchProduct }) => {
+  const history = useHistory()
+  return (
   <AppBar position="sticky">
     <Toolbar className="toolbar">
         <Link to="/">
@@ -35,11 +37,17 @@ const MainNavBar: React.FC<ReduxProps> = ({ cartCount, searchProduct }) => (
             </div>
             <div className="nav-buttons-list">
               <Button className="nav-button" variant="contained">Log in</Button>
-              <Button className="nav-button cart-button" variant="contained"><ShoppingCartIcon/> Cart ({cartCount})</Button>
+              <Button
+                className="nav-button cart-button"
+                variant="contained"
+                onClick={() => { history.push('/cart') }}
+                >
+                <ShoppingCartIcon/> Cart ({cartCount})
+              </Button>
             </div>
           </nav>
     </Toolbar>
   </AppBar>
-)
+)}
 
 export default connector(MainNavBar)

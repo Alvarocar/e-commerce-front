@@ -11,6 +11,7 @@ const HomePage = React.lazy(() => import('../pages/HomePage'))
 const ProductPage = React.lazy(() => import('../pages/ProductPage'))
 const ProductsByCategory = React.lazy(() => import('../pages/ProductsByCategory'))
 const SearchPage = React.lazy(() => import('../pages/SearchPage'))
+const CartPage = React.lazy(() => import('../pages/CartPage'))
 
 const MainLayout = () => {
   const { path } = useRouteMatch()
@@ -20,6 +21,7 @@ const MainLayout = () => {
       <Suspense fallback={<DefaultLoader/>}>
         <Switch>
           <Route exact path={path} component={HomePage}/>
+          <Route exact path={`${path}cart`} component={CartPage} />
           <Route exact path={`${path}search`} component={SearchPage}/>
           <Route exact path={`${path}:category_slug`} component={ProductsByCategory} />
           <Route exact path={`${path}:category_slug/:product_slug`} component={ProductPage} />
