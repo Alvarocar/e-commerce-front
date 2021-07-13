@@ -5,5 +5,6 @@ enum EMessage {
 export default EMessage
 
 export enum EUser {
-  SUCCESS_SIGNUP = "Your account has been created, welcome to our community."
+  SUCCESS_SIGNUP = "Your account has been created, welcome to our community.",
+  SUCCESS_LOGIN = "Welcome"
 }

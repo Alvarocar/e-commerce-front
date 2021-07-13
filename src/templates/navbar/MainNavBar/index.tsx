@@ -36,7 +36,11 @@ const MainNavBar: React.FC<ReduxProps> = ({ cartCount, searchProduct }) => {
               <Link className="nav-link" to="/winter">Winter</Link>
             </div>
             <div className="nav-buttons-list">
-              <Button className="nav-button" variant="contained">Log in</Button>
+              <Button
+                className="nav-button"
+                variant="contained"
+                onClick={() => { history.push('/log-in') }}
+                >Log in</Button>
               <Button
                 className="nav-button cart-button"
                 variant="contained"

@@ -1,0 +1,26 @@
+.login {
+  align-self: center;
+  justify-self: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 1rem;
+}
+
+.login-form-submit {
+  width: 8rem;
+  align-self: center;
+  padding: .8rem 0;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #212121;
+  font-size: 1rem;
+  font-weight: 600;
+  &:hover {
+    opacity: .9;
+  }
+}

@@ -13,6 +13,7 @@ const ProductsByCategory = React.lazy(() => import('../pages/ProductsByCategory'
 const SearchPage = React.lazy(() => import('../pages/SearchPage'))
 const CartPage = React.lazy(() => import('../pages/CartPage'))
 const SignUp = React.lazy(() => import('../pages/SignUp'))
+const Login = React.lazy(() => import('../pages/Login'))
 
 const MainLayout = () => {
   const { path } = useRouteMatch()
@@ -25,6 +26,7 @@ const MainLayout = () => {
           <Route exact path={`${path}cart`} component={CartPage} />
           <Route exact path={`${path}search`} component={SearchPage}/>
           <Route exact path={`${path}sign-up`} component={SignUp} />
+          <Route exact path={`${path}log-in`} component={Login} />
           <Route exact path={`${path}:category_slug`} component={ProductsByCategory} />
           <Route exact path={`${path}:category_slug/:product_slug`} component={ProductPage} />
           <Redirect to={path}/>

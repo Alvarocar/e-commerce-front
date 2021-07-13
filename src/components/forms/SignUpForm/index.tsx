@@ -3,6 +3,7 @@ import { useCallback } from "react"
 import { useForm } from "react-hook-form"
 import { connect, ConnectedProps } from "react-redux"
 import { Link, useHistory } from "react-router-dom"
+import { RootState } from "../../../store/store"
 import { doSignUp } from "../../../store/user"
 import styles from './styles.module.scss'
 
@@ -10,7 +11,11 @@ const mapToDispatch = {
   signup: (username: string, password: string) => doSignUp({username, password})
 }
 
-const connector = connect(undefined, mapToDispatch)
+const mapToState = (state: RootState) => ({
+  status: state.user.status
+})
+
+const connector = connect(mapToState, mapToDispatch)
 
 type ReduxProps = ConnectedProps<typeof connector>
 
@@ -20,15 +25,20 @@ interface InputForm {
   confirmPassword: string
 }
 
-const SignUpForm: React.FC<ReduxProps> = ({ signup }) => {
+const SignUpForm: React.FC<ReduxProps> = ({ signup, status }) => {
 
   const history = useHistory()
   const { register, handleSubmit, watch, formState: { errors } } = useForm<InputForm>()
 
   const onSubmit = useCallback((data: InputForm) => {
     signup(data.username, data.password)
-    history.push('/log-in')
-  }, [signup, history])
+    .then(() => {
+      if (status === 'Failed') {
+        return
+      }
+      history.push('/log-in')
+    })
+  }, [signup, history, status])
   
   return (
   <div className={styles.formCard}>
@@ -37,6 +47,7 @@ const SignUpForm: React.FC<ReduxProps> = ({ signup }) => {
       <TextField variant="outlined"
         label="Username"
         type="text"
+        autoComplete="off"
         error={errors.username && true}
         helperText={
           errors.username?.type === 'minLength' && 'The username must have at least 4 characters'}
