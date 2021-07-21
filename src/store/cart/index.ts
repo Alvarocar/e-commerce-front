@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem } from "../../model/Cart";
-import { ProductDao } from "../../model/Product";
+import { ProductDto } from "../../model/Product";
 import { RootState } from "../store";
 
 /**
@@ -30,7 +30,7 @@ export const CartSlice = createSlice({
   name: 'cart',
   initialState: initialState(),
   reducers: {
-    addCartItem(state, action: PayloadAction<{product: ProductDao, quantity: number}>) {
+    addCartItem(state, action: PayloadAction<{product: ProductDto, quantity: number}>) {
       const index  = state.products.findIndex(item => item.product.id === action.payload.product.id)
       const price = Number(action.payload.product.price) * action.payload.quantity
       if (index < 0) {
@@ -50,7 +50,7 @@ export const CartSlice = createSlice({
       state.total += price
       localStorage.setItem(cartKey, JSON.stringify(state))
     },
-    deleteFullCartItem(state, action: PayloadAction<ProductDao>) {
+    deleteFullCartItem(state, action: PayloadAction<ProductDto>) {
       const index  = state.products.findIndex(item => item.product.id === action.payload.id)
       if (index < 0)
         return
@@ -80,11 +80,17 @@ export const CartSlice = createSlice({
       state.productsCount -= quantity
       state.total -= withdrawal
       localStorage.setItem(cartKey, JSON.stringify(state))
+    },
+    cleanCart(state) {
+      localStorage.removeItem(cartKey)
+      state.products = []
+      state.productsCount = 0
+      state.total = 0
     }
   }
 })
 
-export const { addCartItem, deleteFullCartItem, deleteCartItem } = CartSlice.actions
+export const { addCartItem, deleteFullCartItem, deleteCartItem, cleanCart } = CartSlice.actions
 
 export const selectCart = (root: RootState) => root.cart
 

@@ -1,9 +1,8 @@
 import { TextField } from "@material-ui/core"
-import { useCallback, useEffect } from "react"
+import { useCallback } from "react"
 import { useForm } from "react-hook-form"
 import { connect, ConnectedProps } from "react-redux"
 import { Link, useHistory } from "react-router-dom"
-import { RootState } from "../../../store/store"
 import { doLogin } from "../../../store/user"
 import styles from './styles.module.scss'
 
@@ -11,11 +10,7 @@ const mapToDispatch = {
   login: (name: string, password: string) => doLogin({name, password})
 }
 
-const mapToState = (state: RootState) => ({
-  token: state.user.token
-})
-
-const connector = connect(mapToState, mapToDispatch)
+const connector = connect(undefined, mapToDispatch)
 
 type ReduxProps = ConnectedProps<typeof connector>
 
@@ -24,24 +19,19 @@ interface FormInputs {
   password: string;
 }
 
-const LoginForm: React.FC<ReduxProps> = ({ login, token }) => {
+const LoginForm: React.FC<ReduxProps> = ({ login }) => {
+  
   const history = useHistory()
-  
-  useEffect(() => {
-    if (token !== null) {
-      history.push('/')
-    }
-  }, [token, history])
-  
   const { register, handleSubmit } = useForm<FormInputs>()
 
   const onSubmit = useCallback( (data: FormInputs) => {
     login(data.username, data.password)
-    .then(() => {
-      if (token !== null)
+    .then((data) => {
+      if (data.meta.requestStatus === 'fulfilled') {
         history.push('/')
+      }
     })
-  }, [login ,history, token])
+  }, [login, history])
 
   return (
   <div className={styles.login} onSubmit={handleSubmit(onSubmit)}>

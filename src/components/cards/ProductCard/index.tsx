@@ -1,9 +1,9 @@
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core'
 import React from 'react'
-import { ProductDao } from "../../../model/Product"
+import { ProductDto } from "../../../model/Product"
 import styles from './styles.module.scss'
 interface Props {
-  product: ProductDao
+  product: ProductDto
 }
 
 const ProductCard:React.FC<Props> = ({ product }) => (

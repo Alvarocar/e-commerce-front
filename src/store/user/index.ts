@@ -5,15 +5,27 @@ import UserRepository from "../../repository/UserRepository"
 import { RootState } from "../store"
 
 export interface UserState {
-  username: string | null,
   status: 'Idle' | 'Loading' | 'Failed',
-  token: string | null
+  token: string | null,
+  isAuthenticated: boolean
 }
 
-const initialState: UserState = {
-  username: null,
-  status: 'Idle',
-  token: null
+const TOKEN = 'TOKEN'
+
+const initialState = (): UserState => {
+  const token = localStorage.getItem(TOKEN)
+  if (token) {
+    return {
+      status: 'Idle',
+      token,
+      isAuthenticated: true
+    }
+  }
+  return {
+    status: 'Idle',
+    token: null,
+    isAuthenticated: false
+  }
 }
 
 export const doSignUp = createAsyncThunk('user/signup',
@@ -64,8 +76,14 @@ export const doLogin = createAsyncThunk('user/login',
 
 export const UserSlice = createSlice({
   name: 'user',
-  initialState,
-  reducers: {},
+  initialState: initialState(),
+  reducers: {
+    logOut(state) {
+      state.isAuthenticated = false
+      state.token = null
+      localStorage.removeItem(TOKEN)
+    }
+  },
   extraReducers: (builder) => {
     //doSignUp
     builder.addCase(doSignUp.pending, (state) => {
@@ -85,14 +103,19 @@ export const UserSlice = createSlice({
     builder.addCase(doLogin.rejected, (state) => {
       state.status = 'Failed'
       state.token = null
+      state.isAuthenticated = false
     })
     builder.addCase(doLogin.fulfilled, (state, action) => {
       state.status = 'Idle'
       state.token = action.payload
+      state.isAuthenticated = false
+      localStorage.setItem(TOKEN, action.payload)
     })
   }
 })
 
 export const selectUser = (state: RootState) => state.user
+
+export const { logOut } = UserSlice.actions
 
 export default UserSlice.reducer

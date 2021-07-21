@@ -3,7 +3,7 @@ import { Paper, Table, TableBody, TableCell,
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { Link } from "react-router-dom";
-import { ProductDao } from "../../../model/Product";
+import { ProductDto } from "../../../model/Product";
 import { addCartItem, deleteCartItem, deleteFullCartItem } from "../../../store/cart";
 import { RootState } from "../../../store/store";
 import styles from './styles.module.scss'
@@ -15,8 +15,8 @@ const mapState = (state: RootState) => ({
 })
 
 const mapDispatch = {
-  addItem: (product: ProductDao) => addCartItem({product, quantity: 1}),
-  deleteRow: (product: ProductDao) => deleteFullCartItem(product),
+  addItem: (product: ProductDto) => addCartItem({product, quantity: 1}),
+  deleteRow: (product: ProductDto) => deleteFullCartItem(product),
   deleteItem: (productId: number) => deleteCartItem({productId, quantity: 1})
 }
 

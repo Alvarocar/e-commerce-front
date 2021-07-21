@@ -1,8 +1,8 @@
-import { ProductDao } from "./Product";
+import { ProductDto } from "./Product";
 
-export interface CategoryDao {
+export interface CategoryDto {
   id: number
   name: string
   get_absolute_url: string
-  products: ProductDao[]
+  products: ProductDto[]
 }

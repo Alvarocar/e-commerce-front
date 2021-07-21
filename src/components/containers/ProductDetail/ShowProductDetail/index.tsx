@@ -3,12 +3,12 @@ import { Button, TextField } from "@material-ui/core"
 import { useState, useCallback } from 'react'
 import { connect, ConnectedProps } from "react-redux"
 import { toast } from "react-toastify"
-import { ProductDao } from "../../../../model/Product"
+import { ProductDto } from "../../../../model/Product"
 import { addCartItem } from "../../../../store/cart"
 import styles from './styles.module.scss'
 
 const mapDispatch = {
-  addCart: (product: ProductDao, quantity: number) => addCartItem({product, quantity})
+  addCart: (product: ProductDto, quantity: number) => addCartItem({product, quantity})
 }
 
 const connector = connect(undefined, mapDispatch)
@@ -16,7 +16,7 @@ const connector = connect(undefined, mapDispatch)
 type ReduxProps = ConnectedProps<typeof connector>
 
 interface Props extends ReduxProps{
-  product: ProductDao | null
+  product: ProductDto | null
 }
 
 const ShowProductDetail: React.FC<Props> = ({ product, addCart }) => {

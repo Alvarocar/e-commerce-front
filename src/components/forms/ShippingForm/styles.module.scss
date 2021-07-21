@@ -1,0 +1,38 @@
+@use '../../../App.module.scss' as app;
+
+.shipping-fieldset {
+  padding: 2rem 0;
+  border: none;
+}
+
+.shipping-fieldset-legend {
+  font-size: 1.2rem;
+  font-weight: 600;
+  opacity: .6;
+}
+
+.shipping-fieldset-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  column-gap: 1.5rem;
+  row-gap: 2rem;
+  /*Hide arrows in input[type=number] */
+  /* Chrome, Safari, Edge, Opera */
+  & input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0; 
+  }
+  /* Firefox */
+& input[type='number'] {
+  -moz-appearance: textfield;
+}
+}
+
+.shipping-submit {
+  @include app.black-button;
+}
+
+.log-in-button {
+  @include app.black-button;
+}

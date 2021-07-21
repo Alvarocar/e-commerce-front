@@ -1,16 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CategoryDao } from "../../model/Category";
-import { ProductDao } from "../../model/Product";
+import { CategoryDto } from "../../model/Category";
+import { ProductDto } from "../../model/Product";
 import { getLatestProducts, getProductDetail,
        getProductByCategories, searchProducts } from '../../repository/ProductRepository'
 import { RootState } from "../store";
 
 export interface ProductState {
-  products: Array<ProductDao>,
+  products: Array<ProductDto>,
   status: 'Idle' | 'Loading' | 'Failed'
-  selectedProduct: ProductDao | null
-  productsByCategory: CategoryDao | null,
-  searchedProducts: ProductDao[]
+  selectedProduct: ProductDto | null
+  productsByCategory: CategoryDto | null,
+  searchedProducts: ProductDto[]
 }
 
 const initialState: ProductState = {

@@ -1,13 +1,13 @@
 import ECommerceAxios from "../api/ECommerceAxios";
 import EMessage from "../constants/EMessage";
-import { CategoryDao } from "../model/Category";
-import { ProductDao } from "../model/Product";
+import { CategoryDto } from "../model/Category";
+import { ProductDto } from "../model/Product";
 
 const api = '/api/v1'
 
-export const getLatestProducts = async (): Promise<ProductDao[]> => {
+export const getLatestProducts = async (): Promise<ProductDto[]> => {
   try {
-    const products = await ECommerceAxios.get<ProductDao[]>(`${api}/latest-products/`)
+    const products = await ECommerceAxios.get<ProductDto[]>(`${api}/latest-products/`)
     return products.data
   } catch {
     throw new Error(EMessage.NetworkError)
@@ -15,9 +15,9 @@ export const getLatestProducts = async (): Promise<ProductDao[]> => {
 }
 
 export const getProductDetail = async (category_slug: string,
-   product_slug: string): Promise<ProductDao> => {
+   product_slug: string): Promise<ProductDto> => {
   try {
-    const product = await ECommerceAxios.get<ProductDao>(`${api}/products/${category_slug}/${product_slug}`)
+    const product = await ECommerceAxios.get<ProductDto>(`${api}/products/${category_slug}/${product_slug}`)
     return product.data
   } catch {
     throw new Error(EMessage.NetworkError)
@@ -25,19 +25,19 @@ export const getProductDetail = async (category_slug: string,
 }
 
 export const getProductByCategories = async (
-    category_slug: string): Promise<CategoryDao> => {
+    category_slug: string): Promise<CategoryDto> => {
   try {
-    const categoryDao = await ECommerceAxios.get<CategoryDao>(`${api}/products/${category_slug}/`)
+    const categoryDao = await ECommerceAxios.get<CategoryDto>(`${api}/products/${category_slug}/`)
     return categoryDao.data
   } catch {
     throw new Error(EMessage.NetworkError)
   }
 }
 
-export const searchProducts = async (query: string): Promise<ProductDao[]> => {
+export const searchProducts = async (query: string): Promise<ProductDto[]> => {
   try {
     const products = await ECommerceAxios
-          .post<ProductDao[]>(`${api}/products/search/`, { query })
+          .post<ProductDto[]>(`${api}/products/search/`, { query })
     return products.data
   } catch {
     throw new Error(EMessage.NetworkError)

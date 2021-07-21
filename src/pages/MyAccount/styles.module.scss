@@ -1,0 +1,17 @@
+.container {
+  min-height: 80vh;
+  padding: 2rem 3rem 0;
+}
+
+.log-out-button {
+  width: 5rem;
+  padding: 1rem 0;
+  background-color: #F44336;
+  color: #fff;
+  font-weight: 800;
+  border-style: none;
+  border-radius: 10px;
+  &:hover {
+    background-color: #D32F2F;
+  }
+}

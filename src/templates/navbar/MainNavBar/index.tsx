@@ -5,10 +5,12 @@ import { Link, useHistory } from 'react-router-dom'
 import SearchBox from "../../../components/search/SearchBox";
 import { searchAsyncProducts } from "../../../store/product";
 import { RootState } from "../../../store/store";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import './styles.scss'
 
 const mapState = (state: RootState) => ({
-  cartCount: state.cart.productsCount
+  cartCount: state.cart.productsCount,
+  token: state.user.token
 })
 
 const mapDispatch = {
@@ -19,7 +21,8 @@ const connector = connect(mapState, mapDispatch)
 
 type ReduxProps = ConnectedProps<typeof connector>
 
-const MainNavBar: React.FC<ReduxProps> = ({ cartCount, searchProduct }) => {
+const MainNavBar: React.FC<ReduxProps> = ({ cartCount, searchProduct, token }) => {
+
   const history = useHistory()
   return (
   <AppBar position="sticky">
@@ -36,11 +39,18 @@ const MainNavBar: React.FC<ReduxProps> = ({ cartCount, searchProduct }) => {
               <Link className="nav-link" to="/winter">Winter</Link>
             </div>
             <div className="nav-buttons-list">
+              { token !== null ? 
               <Button
                 className="nav-button"
                 variant="contained"
+                onClick={() => { history.push('/my-account') }}
+                ><AccountCircleIcon/></Button> 
+                : 
+                <Button
+                className="nav-button"
+                variant="contained"
                 onClick={() => { history.push('/log-in') }}
-                >Log in</Button>
+                >Log in</Button>}
               <Button
                 className="nav-button cart-button"
                 variant="contained"

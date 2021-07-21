@@ -8,3 +8,7 @@ export enum EUser {
   SUCCESS_SIGNUP = "Your account has been created, welcome to our community.",
   SUCCESS_LOGIN = "Welcome"
 }
+
+export enum EOrder {
+  FAILED_CHECKOUT = 'Something went wrong. Please try again'
+}

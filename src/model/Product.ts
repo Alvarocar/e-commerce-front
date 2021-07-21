@@ -1,5 +1,5 @@
 
-export interface ProductDao {
+export interface ProductDto {
   id: number
   name: string
   get_absolute_url: string
