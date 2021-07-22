@@ -1,0 +1,17 @@
+@use '../../App.module.scss' as App;
+
+.main {
+  min-height: 75vh;
+  padding: 2rem;
+}
+
+.section {
+  h1 {
+    opacity: .6;
+  }
+  padding: 1rem 0;
+}
+
+.button {
+  @include App.black-button;
+}

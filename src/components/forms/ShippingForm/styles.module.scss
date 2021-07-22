@@ -36,3 +36,11 @@
 .log-in-button {
   @include app.black-button;
 }
+
+.loader {
+  height: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0.5rem;
+  padding-left: 0;
+}

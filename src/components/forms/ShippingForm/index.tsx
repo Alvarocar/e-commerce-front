@@ -152,7 +152,7 @@ const ShippingForm: React.FC<ReduxProps> = (
           {error.message && <p>{error.message}</p>}
         </div>
       </fieldset>
-      { orderStatus === 'Loading' ? <DefaultLoader/> : <button className={styles['shipping-submit']} type="submit">Pay with Stripe</button>}
+      { orderStatus === 'Loading' ? <DefaultLoader className={styles.loader}/> : <button className={styles['shipping-submit']} type="submit">Pay with Stripe</button>}
     </form>
   )
 }
