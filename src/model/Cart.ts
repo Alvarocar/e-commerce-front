@@ -11,3 +11,9 @@ export interface CartItemDto {
   quantity: number
   price: number
 }
+
+export interface CartItemDtoWithProducts {
+  product: ProductDto
+  quantity: number
+  price: number
+}
